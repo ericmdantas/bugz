@@ -1,11 +1,23 @@
 package cli
 
 type CliOptions struct {
-	Info string
+	Bug   string
+	Msg   string
+	Close bool
+}
+
+func (c *CliOptions) IsValid() bool {
+	if c.Bug != "" && c.Msg != "" {
+		return true
+	}
+
+	return false
 }
 
 func NewCliOptions() *CliOptions {
-	return &CliOptions {
-		Info: "yo",
+	return &CliOptions{
+		Bug:   "",
+		Msg:   "",
+		Close: false,
 	}
 }
