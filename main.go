@@ -11,9 +11,9 @@ import (
 func main() {
 	opts := cli.NewCliOptions()
 
-	flag.StringVar(&opts.Bug, "b", "", "Deve ser o id do bug: -b=12346")
-	flag.StringVar(&opts.Msg, "m", "", "Deve ser a mensagem do commit: -m=conserta_algo")
-	flag.BoolVar(&opts.Close, "close", false, "Deve dizer se pode ou não fechar: -close")
+	flag.StringVar(&opts.Bug, "b", "", "Bug id -> Usage: -b=12346")
+	flag.StringVar(&opts.Msg, "m", "", "Commit message -> Usage: -m=conserta_algo")
+	flag.BoolVar(&opts.Close, "close", false, "Should close or not -> Usage: -close")
 	flag.Parse()
 
 	if err := cli.Send(opts); err != nil {
