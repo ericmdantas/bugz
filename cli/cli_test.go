@@ -66,15 +66,15 @@ func TestNewCliOptions(t *testing.T) {
 	defaultClose := false
 
 	if c.Bug != defaultBug {
-		t.Fatalf("Expected bug to equal %s, but got: %s", defaultBug, c.Bug)
+		t.Fatalf("Expected bug to equal %s, but got: %s.", defaultBug, c.Bug)
 	}
 
 	if c.Msg != defaultMsg {
-		t.Fatalf("Expected Msg to equal %s, but got: %s", defaultMsg, c.Msg)
+		t.Fatalf("Expected Msg to equal %s, but got: %s.", defaultMsg, c.Msg)
 	}
 
 	if c.Close != defaultClose {
-		t.Fatalf("Expected Close to equal %v, but got: %s", defaultClose, c.Close)
+		t.Fatalf("Expected Close to equal %v, but got: %s.", defaultClose, c.Close)
 	}
 }
 
@@ -87,7 +87,8 @@ func TestCliValidation(t *testing.T) {
 		cli.Close = v.in.Close
 
 		if cli.IsValid() != v.out {
-			t.Fatalf("Expected cli to be %t, but got %t", v.out, cli.IsValid())
+			t.Logf("Error: %v \n", cli)
+			t.Fatalf("Expected cli to be %t, but got %t.", v.out, cli.IsValid())
 		}
 	}
 }
