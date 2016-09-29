@@ -2,8 +2,15 @@ package main
 
 import (
 	"fmt"
+	"flag"
+	"github.com/ericmdantas/bugz-cli/cli"
 )
 
 func main() {
-	fmt.Println("!")
+	cli := cli.NewCliOptions()
+
+	flag.StringVar(&cli.Info, "info", "", "-info=wtf")
+	flag.Parse()
+
+	fmt.Println(cli)
 }
