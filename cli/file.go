@@ -1,20 +1,21 @@
 package cli
 
 type File struct {
-	files []string
+	filesPath []string
 }
 
-func GetFilesModified() (*File, error) {
+func GetFilesModifiedPaths() (*File, error) {
 	f := File{}
-	var fs []string
 
-	fs = append(fs, []string{
+	f.filesPath = append(f.filesPath, []string{
 		"___test1.txt",
 		"___test2.txt",
 		"___test3.txt",
 	}...)
 
-	f.files = fs
-
 	return &f, nil
+}
+
+func GetFilesModifiedContent() {
+
 }

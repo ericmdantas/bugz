@@ -4,11 +4,11 @@ import (
 	"testing"
 )
 
-func TestGetFilesModified(t *testing.T) {
-	f, r := GetFilesModified()
+func TestGetFilesModifiedPath(t *testing.T) {
+	f, r := GetFilesModifiedPaths()
 
-	if len(f.files) == 0 {
-		t.Fatalf("Expected files to be filled, but it's not.")
+	if len(f.filesPath) == 0 {
+		t.Fatalf("Expected filesPath to be filled, but it's not.")
 	}
 
 	if r != nil {
