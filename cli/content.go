@@ -1,14 +1,18 @@
 package cli
 
 import (
+	"errors"
 	"io/ioutil"
+	"log"
 )
 
+type fileInfo struct {
+	BodyRaw        []byte
+	BodyCompressed []byte
+}
+
 type Content struct {
-	Files map[string]struct {
-		BodyRaw        []byte
-		BodyCompressed []byte
-	}
+	Files map[string]*fileInfo
 }
 
 func (c *Content) Transform() error {
@@ -23,9 +27,19 @@ func (c *Content) Transform() error {
 	for _, v := range paths {
 		content, err := ioutil.ReadFile(v)
 
-		c.Files[v].BodyRaw = content
-		if c.Files[v].BodyCompressed, err = Compress(content); err != nil {
-			panic(err)
+		if err != nil {
+			log.Fatalf(errors.New("There was an error trying to read the file content: %s").Error(), v)
+		}
+
+		contentCompressed, err := Compress(content)
+
+		if err != nil {
+			log.Fatalf(errors.New("There was an error trying to compress the file. Error: %s").Error(), err)
+		}
+
+		c.Files[v] = &fileInfo{
+			BodyRaw:        content,
+			BodyCompressed: contentCompressed,
 		}
 	}
 
@@ -33,14 +47,18 @@ func (c *Content) Transform() error {
 }
 
 func (c *Content) IsEmpty() bool {
-	return len(c.Files) > 0
+	return len(c.Files) == 0
 }
 
 func NewContent() *Content {
 	return &Content{
-		Files: make(map[string]struct {
-			BodyRaw        []byte
-			BodyCompressed []byte
-		}),
+		Files: make(map[string]*fileInfo),
+	}
+}
+
+func newFileInfo(bodyRaw, bodyCompressed []byte) *fileInfo {
+	return &fileInfo{
+		BodyRaw:        bodyRaw,
+		BodyCompressed: bodyCompressed,
 	}
 }

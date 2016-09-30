@@ -17,7 +17,6 @@ func main() {
 	flag.Parse()
 
 	if err := cli.Send(opts); err != nil {
-		log.Println(errors.New("There was an error while trying to send the files."))
-		log.Fatalln(err)
+		log.Fatalf(errors.New("There was an error while trying to send the files. Error: %v").Error(), err)
 	}
 }

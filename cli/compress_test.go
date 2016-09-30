@@ -5,9 +5,13 @@ import (
 )
 
 func TestCompress(t *testing.T) {
-	r := Compress()
+	r, err := Compress([]byte("a"))
 
-	if r != nil {
-		t.Fatal("Expected no error to occur, but there was one.")
+	if err != nil {
+		t.Fatal("Expected error NOT to occur, but there was one.")
+	}
+
+	if len(r) == 0 {
+		t.Fatal("Expected returned info to be compressed.")
 	}
 }
