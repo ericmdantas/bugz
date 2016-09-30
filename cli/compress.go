@@ -4,6 +4,6 @@ import (
 	_ "compress/gzip"
 )
 
-func Compress() error {
-	return nil
+func Compress(info []byte) ([]byte, error) {
+	return []byte(""), nil
 }
